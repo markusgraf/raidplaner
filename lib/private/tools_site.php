@@ -51,8 +51,8 @@
 
     function getBaseURL()
     {
-        $Protocol = (strpos($_SERVER['SERVER_PROTOCOL'], 'https') !== false) ? 'https://' : 'http://';
-        $Host = $_SERVER['SERVER_NAME'].(($_SERVER['SERVER_PORT'] == 80) ? '' : ':'.$_SERVER['SERVER_PORT']);
+        $Protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://';
+        $Host = $_SERVER['SERVER_NAME'].((in_array($_SERVER['SERVER_PORT'], array(80,443))) ? '' : ':'.$_SERVER['SERVER_PORT']);
 
         $LibIdx = strpos($_SERVER['REQUEST_URI'], 'lib/');
         $Path   = ($LibIdx !== false)
